@@ -56,21 +56,15 @@ const upload = multer({
 })
 // end imag eupload 
 
-router.post('/add_employee',upload.single('image'), (req, res) => {
-    console.log(req.body,"asdasd");
-    const sql = `INSERT INTO employee 
-    (name,email,password, address, salary,image, category_id) 
+router.post('/add_admin', (req, res) => {
+    const sql = `INSERT INTO admin 
+    (email,password) 
     VALUES (?)`;
     bcrypt.hash(req.body.password, 10, (err, hash) => {
         if(err) return res.json({Status: false, Error: "Query Error"})
         const values = [
-            req.body.name,
             req.body.email,
             hash,
-            req.body.address,
-            req.body.salary, 
-            req.file.filename,
-            req.body.category_id
         ]
         con.query(sql, [values], (err, result) => {
             if(err) return res.json({Status: false, Error: err})
@@ -96,22 +90,22 @@ router.get('/employee/:id', (req, res) => {
     })
 })
 
-router.put('/edit_employee/:id', (req, res) => {
+router.put('/edit_admin/:id', (req, res) => {
     const id = req.params.id;
     const sql = `UPDATE employee 
-        set name = ?, email = ?, salary = ?, address = ?, category_id = ? 
+        set name = ?, email = ?, 
         Where id = ?`
-    const values = [
-        req.body.name,
-        req.body.email,
-        req.body.salary,
-        req.body.address,
-        req.body.category_id
-    ]
-    con.query(sql,[...values, id], (err, result) => {
-        if(err) return res.json({Status: false, Error: "Query Error"+err})
-        return res.json({Status: true, Result: result})
-    })
+        bcrypt.hash(req.body.password, 10, (err, hash) => {
+            if(err) return res.json({Status: false, Error: "Query Error"})
+            const values = [
+                req.body.email,
+                hash,
+            ]
+            con.query(sql, [values], (err, result) => {
+                if(err) return res.json({Status: false, Error: err})
+                return res.json({Status: true})
+            })
+        })
 })
 
 router.delete('/delete_employee/:id', (req, res) => {

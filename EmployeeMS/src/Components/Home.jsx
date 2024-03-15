@@ -1,7 +1,9 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const useNav = useNavigate()
   const [adminTotal, setAdminTotal] = useState(0)
   const [employeeTotal, setemployeeTotal] = useState(0)
   const [salaryTotal, setSalaryTotal] = useState(0)
@@ -84,7 +86,11 @@ const Home = () => {
           </div>
         </div>
       </div>
+    
       <div className='mt-4 px-5 pt-3'>
+      <Link to="/dashboard/add_admin" className="btn btn-success mb-4">
+        Add Admin
+      </Link>
         <h3>List of Admins</h3>
         <table className='table'>
           <thead>
@@ -95,12 +101,14 @@ const Home = () => {
           </thead>
           <tbody>
             {
-              admins.map(a => (
+              admins.map((a) => (
                 <tr>
                   <td>{a.email}</td>
                   <td>
                   <button
-                    className="btn btn-info btn-sm me-2">
+                    className="btn btn-info btn-sm me-2" onClick={()=>{
+                      useNav(`/dashboard/add_admin/${a.id}`)
+                    }}>
                     Edit
                   </button>
                   <button
