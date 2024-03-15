@@ -47,7 +47,7 @@ const Login = () => {
                 </div>
                 <button className='btn btn-success w-100 rounded-0 mb-2'>Log in</button>
                 <div className='mb-1'> 
-                    <input type="checkbox" name="tick" id="tick" className='me-2'/>
+                    <input type="checkbox" name="tick" id="tick" className='me-2' required/>
                     <label htmlFor="password">You are Agree with terms & conditions</label>
                 </div>
             </form>
