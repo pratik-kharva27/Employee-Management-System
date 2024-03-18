@@ -30,6 +30,9 @@ const Start = () => {
           <button type="button" className="btn btn-success" onClick={() => {navigate('/adminlogin')}}>
             Admin
           </button>
+          <button type="button" className="btn btn-primary" onClick={() => {navigate('/manager_login')}}>
+            Manager
+          </button>
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@ import './style.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
-const EmployeeLogin = () => {
+const ManagerLogin = () => {
     const [values, setValues] = useState({
         email: '',
         password: ''
@@ -13,12 +13,12 @@ const EmployeeLogin = () => {
     axios.defaults.withCredentials = true;
     const handleSubmit = (event) => {
         event.preventDefault()
-        axios.post('http://localhost:3000/employee/employee_login', values)
+        axios.post('http://localhost:3000/manager/manager_login', values)
         .then(result => {
             // console.log(result,"asd");
             if(result.data.loginStatus) {
                 localStorage.setItem("valid", true)
-                navigate('/employee_detail/'+result.data.id)
+                navigate('/manager_detail/'+result.data.id)
             } else {
                 setError(result.data.Error)
             }
@@ -26,13 +26,14 @@ const EmployeeLogin = () => {
         .catch(err => console.log(err))
     }
 
+
   return (
     <div className='d-flex justify-content-center align-items-center vh-100 loginPage'>
         <div className='p-3 rounded w-25 border loginForm'>
             <div className='text-warning'>
                 {error && error}
             </div>
-            <h2>Employee Login</h2>
+            <h2>Manager Login</h2>
             <form onSubmit={handleSubmit}>
                 <div className='mb-3'>
                     <label htmlFor="email"><strong>Email:</strong></label>
@@ -55,4 +56,4 @@ const EmployeeLogin = () => {
   )
 }
 
-export default EmployeeLogin
+export default ManagerLogin

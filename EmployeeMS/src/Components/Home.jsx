@@ -8,12 +8,14 @@ const Home = () => {
   const [employeeTotal, setemployeeTotal] = useState(0)
   const [salaryTotal, setSalaryTotal] = useState(0)
   const [admins, setAdmins] = useState([])
+  const [managerTotal, setmanagerTotal]= useState(0)
 
   useEffect(() => {
     adminCount();
     employeeCount();
     salaryCount();
     AdminRecords();
+    managerCount();
   }, [])
 
   const AdminRecords = () => {
@@ -39,6 +41,14 @@ const Home = () => {
     .then(result => {
       if(result.data.Status) {
         setemployeeTotal(result.data.Result[0].employee)
+      }
+    })
+  }
+  const managerCount = () => {
+    axios.get('http://localhost:3000/auth/manager_count')
+    .then(result => {
+      if(result.data.Status) {
+        setmanagerTotal(result.data.Result[0].employee)
       }
     })
   }
@@ -77,12 +87,22 @@ const Home = () => {
         </div>
         <div className='px-3 pt-2 pb-3 border shadow-sm w-25'>
           <div className='text-center pb-1'>
+            <h4>Manager</h4>
+          </div>
+          <hr />
+          <div className='d-flex justify-content-between'>
+            <h5>Total:</h5>
+            <h5>{managerTotal}</h5>
+          </div>
+        </div>
+        <div className='px-3 pt-2 pb-3 border shadow-sm w-25'>
+          <div className='text-center pb-1'>
             <h4>Salary</h4>
           </div>
           <hr />
           <div className='d-flex justify-content-between'>
             <h5>Total:</h5>
-            <h5>₹{salaryTotal}</h5>
+            <h5>₹ {salaryTotal}</h5>
           </div>
         </div>
       </div>
@@ -101,8 +121,8 @@ const Home = () => {
           </thead>
           <tbody>
             {
-              admins.map((a) => (
-                <tr>
+              admins.map((a,index) => (
+                <tr key={index}>
                   <td>{a.email}</td>
                   <td>
                   <button

@@ -11,6 +11,7 @@ router.post("/adminlogin", (req, res) => {
   const sql = "SELECT * from admin Where email = ? and password = ?";
   con.query(sql, [req.body.email, req.body.password], (err, result) => {
     if (err) return res.json({ loginStatus: false, Error: "Query error" });
+    // console.log(result,"UUUU");
     if (result.length > 0) {
       const email = result[0].email;
       const token = jwt.sign(
@@ -129,6 +130,14 @@ router.get('/employee_count', (req, res) => {
     const sql = "select count(id) as employee from employee";
     con.query(sql, (err, result) => {
         if(err) return res.json({Status: false, Error: "Query Error"+err})
+        return res.json({Status: true, Result: result})
+    })
+})
+
+router.get('/manager_count', (req, res) =>{
+    const sql = "select count(id) as manager from manager";
+    con.query(sql, (err, result) =>{
+        if(err) return res.json({Status: false, Error: "Query Error" +err})
         return res.json({Status: true, Result: result})
     })
 })

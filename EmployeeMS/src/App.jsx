@@ -17,6 +17,9 @@ import EmployeeLogin from './Components/EmployeeLogin'
 import EmployeeDetail from './Components/EmployeeDetail'
 import PrivateRoute from './Components/PrivateRoute'
 import AddAdmin from './Components/AddAdmin'
+import Manager from './Components/Manager'
+import AddManager from './Components/AddManager'
+import ManagerLogin from './Components/ManagerLogin'
 
 
 function App() {
@@ -26,6 +29,7 @@ function App() {
       <Route path='/' element={<Start />}></Route>
       <Route path='/adminlogin' element={<Login />}></Route>
       <Route path='/employee_login' element={<EmployeeLogin />}></Route>
+      <Route path='/manager_login' element={<ManagerLogin />}></Route>
       <Route path='/employee_detail/:id' element={<EmployeeDetail />}></Route>
       <Route path='/dashboard' element={
         <PrivateRoute >
@@ -41,6 +45,8 @@ function App() {
         <Route path='/dashboard/edit_employee/:id' element={<EditEmployee />}></Route>
         <Route path='/dashboard/add_admin' element={<AddAdmin />}></Route>
         <Route path='/dashboard/add_admin/:id' element={<AddAdmin />}></Route>
+        <Route path='/dashboard/manager' element={<Manager />}></Route>
+        <Route path='/dashboard/add_manager' element={<AddManager />}></Route>
       </Route>
     </Routes>
     </BrowserRouter>

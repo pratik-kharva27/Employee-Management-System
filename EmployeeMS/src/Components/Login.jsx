@@ -17,6 +17,7 @@ const Login = () => {
         event.preventDefault()
         axios.post('http://localhost:3000/auth/adminlogin', values)
         .then(result => {
+            console.log(result.values,"sparrow with ");
             if(result.data.loginStatus) {
                 localStorage.setItem("valid", true)
                 navigate('/dashboard')
@@ -33,7 +34,7 @@ const Login = () => {
             <div className='text-warning'>
                 {error && error}
             </div>
-            <h2>Login Page</h2>
+            <h2>Admin Login</h2>
             <form onSubmit={handleSubmit}>
                 <div className='mb-3'>
                     <label htmlFor="email"><strong>Email:</strong></label>

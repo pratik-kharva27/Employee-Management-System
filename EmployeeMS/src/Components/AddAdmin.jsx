@@ -66,7 +66,7 @@ const AddAdmin = () => {
           </div>
           <div className="col-12">
             <label for="inputPassword4" className="form-label">
-              Password
+              New Password
             </label>
             <input
               type="password"

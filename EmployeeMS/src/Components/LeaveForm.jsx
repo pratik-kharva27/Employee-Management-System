@@ -6,11 +6,9 @@ const AddEmployee = () => {
   const [employee, setEmployee] = useState({
     name: "",
     email: "",
-    password: "",
-    salary: "",
-    address: "",
-    category_id: 1,
-    image: "",
+    startDate: "",
+    endDate: "",
+    reason: "",
   });
   const [category, setCategory] = useState([]);
   const navigate = useNavigate();
@@ -86,82 +84,53 @@ const AddEmployee = () => {
               }
             />
           </div>
-          <div className="col-12">
-            <label for="inputPassword4" className="form-label">
-              Password
-            </label>
-            <input
-              type="password"
-              className="form-control rounded-0"
-              id="inputPassword4"
-              placeholder="Enter Password"
-              onChange={(e) =>
-                setEmployee({ ...employee, password: e.target.value })
-              }
-            />
-            <label for="inputSalary" className="form-label">
-              Salary
-            </label>
-            <input
-              type="text"
-              className="form-control rounded-0"
-              id="inputSalary"
-              placeholder="Enter Salary"
-              autoComplete="off"
-              onChange={(e) =>
-                setEmployee({ ...employee, salary: e.target.value })
-              }
-            />
-          </div>
+       
           <div className="col-12">
             <label for="inputAddress" className="form-label">
-              Address
+              Start date 
             </label>
             <input
-              type="text"
+              type="date"
               className="form-control rounded-0"
               id="inputAddress"
-              placeholder="Enter Address"
-              autoComplete="off"
+              placeholder="Enter Start Date"
               onChange={(e) =>
                 setEmployee({ ...employee, address: e.target.value })
               }
             />
           </div>
           <div className="col-12">
-            <label for="category" className="form-label">
-              Category
-            </label>
-            <select
-              name="category"
-              id="category"
-              className="form-select"
-              onChange={(e) =>
-                setEmployee({ ...employee, category_id: e.target.value })
-              }
-            >
-              {category.map((c) => {
-                return <option value={c.id}>{c.name}</option>;
-              })}
-            </select>
-          </div>
-          <div className="col-12 mb-3">
-            <label className="form-label" for="inputGroupFile01">
-              Select Image
+            <label for="inputAddress" className="form-label">
+              End date 
             </label>
             <input
-              type="file"
+              type="date"
               className="form-control rounded-0"
-              id="inputGroupFile01"
-              name="image"
+              id="inputAddress"
+              placeholder="Enter End date"
               onChange={(e) =>
-                setEmployee({ ...employee, image: e.target.files[0] })
+                setEmployee({ ...employee, address: e.target.value })
               }
             />
           </div>
           <div className="col-12">
+            <label for="inputAddress" className="form-label">
+              Reason of Leave 
+            </label>
+            <input
+              type="text"
+              className="form-control rounded-0"
+              id="inputAddress"
+              placeholder="Enter Reason...."
+              onChange={(e) =>
+                setEmployee({ ...employee, address: e.target.value })
+              }
+            />
+          </div>
+          
+          <div className="col-12">
             <button type="submit" className="btn btn-primary w-100">
-              Add Employee
+              Apply Leave
             </button>
           </div>
         </form>

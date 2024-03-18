@@ -109,7 +109,7 @@ const EditEmployee = () => {
               type="text"
               className="form-control rounded-0"
               id="inputAddress"
-              placeholder="1234 Main St"
+              placeholder="Enter Address"
               autoComplete="off"
               value={employee.address}
               onChange={(e) =>
