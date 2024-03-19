@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const Employee = () => {
+const EmployeeManagerList = () => {
   const [employee, setEmployee] = useState([]);
   const navigate = useNavigate()
 
@@ -37,7 +37,7 @@ const Employee = () => {
       <div className="d-flex justify-content-center">
         <h3>Employee List</h3>
       </div>
-      <Link to="/dashboard/add_employee" className="btn btn-success">
+      <Link to="/manager-dashboard/add_employee_manager" className="btn btn-success">
         Add Employee
       </Link>
       <div className="mt-3">
@@ -49,7 +49,7 @@ const Employee = () => {
               <th>Email</th>
               <th>Address</th>
               <th>Salary</th>
-              <th>Action</th>
+              <th className="text-center">Action </th>
             </tr>
           </thead>
           <tbody>
@@ -67,16 +67,29 @@ const Employee = () => {
                 <td>{e.salary}</td>
                 <td>
                   <Link
-                    to={`/dashboard/edit_employee/` + e.id}
+                    to={`/manager-dashboard/edit_employee_manager/` + e.id}
                     className="btn btn-info btn-sm me-2"
                   >
                     Edit
                   </Link>
                   <button
-                    className="btn btn-warning btn-sm"
+                    className="btn btn-warning btn-sm me-2"
                     onClick={() => deleteAdmin(e)}
                   >
                     Delete
+                  </button>
+                  <button
+                    className="btn btn-info btn-sm me-2" onClick={()=>{
+                      useNav(`/manager-dashboard/edit_manager_dashboard/${a.id}`)
+                    }}>
+                    Approval Leave
+                  </button>
+                  <button
+                  onClick={()=>{
+                    deleteAdmin(a)
+                  }}
+                    className="btn btn-warning btn-sm" >
+                    Decline Leave
                   </button>
                 </td>
               </tr>
@@ -88,4 +101,4 @@ const Employee = () => {
   );
 };
 
-export default Employee;
+export default EmployeeManagerList;

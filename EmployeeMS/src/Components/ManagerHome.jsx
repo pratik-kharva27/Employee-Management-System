@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 
-const Home = () => {
+const ManagerHome = () => {
   const useNav = useNavigate()
   const [adminTotal, setAdminTotal] = useState(0)
   const [employeeTotal, setemployeeTotal] = useState(0)
@@ -10,8 +10,7 @@ const Home = () => {
   const [admins, setAdmins] = useState([])
   const [managerTotal, setmanagerTotal]= useState(0)
 
-  useEffect(() => {
-    adminCount();
+  useEffect(() => { 
     employeeCount();
     salaryCount();
     AdminRecords();
@@ -19,22 +18,17 @@ const Home = () => {
   }, [])
 
   const AdminRecords = () => {
-    axios.get('http://localhost:3000/auth/admin_records')
+    axios.get('http://localhost:3000/auth/manager')
     .then(result => {
-      if(result.data.Status) {
         setAdmins(result.data.Result)
-      } else {
-         alert(result.data.Error)
-      }
     })
   }
 
   const deleteAdmin=(e)=>{
 
     axios
-    .delete(`http://localhost:3000/auth/delete_admin/${e.id}`)
+    .delete(`http://localhost:3000/auth/delete_manager/${e.id}`)
     .then((result) => {
-      adminCount();
       employeeCount();
       salaryCount();
       AdminRecords();
@@ -44,14 +38,7 @@ const Home = () => {
   }
 
 
-  const adminCount = () => {
-    axios.get('http://localhost:3000/auth/admin_count')
-    .then(result => {
-      if(result.data.Status) {
-        setAdminTotal(result.data.Result[0].admin)
-      }
-    })
-  }
+
   const employeeCount = () => {
     axios.get('http://localhost:3000/auth/employee_count')
     .then(result => {
@@ -82,16 +69,6 @@ const Home = () => {
   return (
     <div>
       <div className='p-3 d-flex justify-content-around mt-3'>
-        <div className='px-3 pt-2 pb-3 border shadow-sm w-25'>
-          <div className='text-center pb-1'>
-            <h4>Admin</h4>
-          </div>
-          <hr />
-          <div className='d-flex justify-content-between'>
-            <h5>Total:</h5>
-            <h5>{adminTotal}</h5>
-          </div>
-        </div>
         <div className='px-3 pt-2 pb-3 border shadow-sm w-25'>
           <div className='text-center pb-1'>
             <h4>Employee</h4>
@@ -125,13 +102,14 @@ const Home = () => {
       </div>
     
       <div className='mt-4 px-5 pt-3'>
-      <Link to="/dashboard/add_admin" className="btn btn-success mb-4">
-        Add Admin
+      <Link to="/manager-dashboard/add_manager_dashboard" className="btn btn-success mb-4">
+        Add Manager
       </Link>
-        <h3>List of Admins</h3>
+        <h3>List of Manager</h3>
         <table className='table'>
           <thead>
             <tr>
+              <th>Image</th>
               <th>Email</th>
               <th>Action</th>
             </tr>
@@ -140,11 +118,17 @@ const Home = () => {
             {
               admins.map((a,index) => (
                 <tr key={index}>
+                    <td>
+                  <img
+                    src={`http://localhost:3000/Images/` + a.image}
+                    className="employee_image"
+                  />
+                </td>
                   <td>{a.email}</td>
                   <td>
                   <button
                     className="btn btn-info btn-sm me-2" onClick={()=>{
-                      useNav(`/dashboard/add_admin/${a.id}`)
+                      useNav(`/manager-dashboard/edit_manager_dashboard/${a.id}`)
                     }}>
                     Edit
                   </button>
@@ -166,4 +150,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default ManagerHome

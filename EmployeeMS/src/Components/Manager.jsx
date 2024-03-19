@@ -6,26 +6,25 @@ const Manager = () => {
   const [employee, setEmployee] = useState([]);
   const navigate = useNavigate()
 
-  useEffect(() => {
+  const getManager = () => {
     axios
-      .get("http://localhost:3000/auth/employee")
-      .then((result) => {
-        if (result.data.Status) {
-          setEmployee(result.data.Result);
-        } else {
-          alert(result.data.Error);
-        }
-      })
-      .catch((err) => console.log(err));
+    .get("http://localhost:3000/auth/manager")
+    .then((result) => {
+      if (result.data.Status) {
+        setEmployee(result.data.Result);
+      } else {
+        alert(result.data.Error);
+      }
+    })
+    .catch((err) => console.log(err));
+  }
+  useEffect(() => {
+    getManager()
   }, []);
   const handleDelete = (id) => {
-    axios.delete('http://localhost:3000/auth/delete_employee/'+id)
+    axios.delete('http://localhost:3000/auth/delete_manager/'+id)
     .then(result => {
-        if(result.data.Status) {
-            window.location.reload()
-        } else {
-            alert(result.data.Error)
-        }
+      getManager()
     })
   } 
   return (
@@ -61,9 +60,9 @@ const Manager = () => {
                 <td>{e.email}</td>
                 <td>{e.address}</td>
                 <td>{e.salary}</td>
-                <td>
+                <td>  
                   <Link
-                    to={`/dashboard/edit_employee/` + e.id}
+                    to={`/dashboard/edit_manager/` + e.id}
                     className="btn btn-info btn-sm me-2"
                   >
                     Edit

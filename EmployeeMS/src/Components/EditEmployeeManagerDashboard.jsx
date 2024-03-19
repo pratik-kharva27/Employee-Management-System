@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
-const EditEmployee = () => {
+const EditEmployeeManagerDashboard = () => {
     const {id} = useParams()
     const [employee, setEmployee] = useState({
         name: "",
@@ -43,7 +43,7 @@ const EditEmployee = () => {
         axios.put('http://localhost:3000/auth/edit_employee/'+id, employee)
         .then(result => {
             if(result.data.Status) {
-                navigate('/dashboard/employee')
+                navigate('/manager-dashboard/list_employee_manager')
             } else {
                 alert(result.data.Error)
             }
@@ -141,4 +141,4 @@ const EditEmployee = () => {
   )
 }
 
-export default EditEmployee
+export default EditEmployeeManagerDashboard

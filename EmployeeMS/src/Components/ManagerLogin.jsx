@@ -18,7 +18,7 @@ const ManagerLogin = () => {
             // console.log(result,"asd");
             if(result.data.loginStatus) {
                 localStorage.setItem("valid", true)
-                navigate('/manager_detail/'+result.data.id)
+                navigate('/manager-dashboard')
             } else {
                 setError(result.data.Error)
             }

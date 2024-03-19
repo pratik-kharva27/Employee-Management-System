@@ -20,6 +20,15 @@ import AddAdmin from './Components/AddAdmin'
 import Manager from './Components/Manager'
 import AddManager from './Components/AddManager'
 import ManagerLogin from './Components/ManagerLogin'
+import EditManager from './Components/EditManager'
+import AddLeave from './Components/LeaveForm'
+import ManagerDashboard from './Components/ManagerDashboard'
+import ManagerHome from './Components/ManagerHome'
+import AddManagerDashboard from './Components/AddManagerDashboard'
+import EditManagerDashboard from './Components/EditManagerDashboard'
+import AddEmployeeManager from './Components/AddEmployeeManager'
+import EmployeeManagerList from './Components/EmployeeManagerList'
+import EditEmployeeManagerDashboard from './Components/EditEmployeeManagerDashboard'
 
 
 function App() {
@@ -30,7 +39,21 @@ function App() {
       <Route path='/adminlogin' element={<Login />}></Route>
       <Route path='/employee_login' element={<EmployeeLogin />}></Route>
       <Route path='/manager_login' element={<ManagerLogin />}></Route>
+      <Route path='/addleave' element={<AddLeave />}></Route>
       <Route path='/employee_detail/:id' element={<EmployeeDetail />}></Route>
+      <Route path='/manager-dashboard' element={
+         <PrivateRoute >
+           <ManagerDashboard />
+         </PrivateRoute>
+      }>
+        <Route path='' element={<ManagerHome />}></Route>
+        <Route path='/manager-dashboard/add_manager_dashboard' element={<AddManagerDashboard />}></Route>
+        <Route path='/manager-dashboard/edit_manager_dashboard/:id' element={<EditManagerDashboard />}></Route>
+        <Route path='/manager-dashboard/add_employee_manager' element={<AddEmployeeManager />}></Route>
+        <Route path='/manager-dashboard/list_employee_manager' element={<EmployeeManagerList />}></Route>
+        <Route path='/manager-dashboard/edit_employee_manager/:id' element={<EditEmployeeManagerDashboard />}></Route>
+
+      </Route>
       <Route path='/dashboard' element={
         <PrivateRoute >
           <Dashboard />
@@ -46,6 +69,7 @@ function App() {
         <Route path='/dashboard/add_admin' element={<AddAdmin />}></Route>
         <Route path='/dashboard/add_admin/:id' element={<AddAdmin />}></Route>
         <Route path='/dashboard/manager' element={<Manager />}></Route>
+        <Route path='/dashboard/edit_manager/:id' element={<EditManager />}></Route>
         <Route path='/dashboard/add_manager' element={<AddManager />}></Route>
       </Route>
     </Routes>

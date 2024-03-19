@@ -1,8 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useParams } from "react-router-dom";
 
 const AddAdmin = () => {
+
+  const params = useParams();
+ 
+
   const [employee, setEmployee] = useState({
     email: "",
     password: "",
@@ -23,7 +27,21 @@ const AddAdmin = () => {
         }
       })
       .catch((err) => console.log(err));
+
+      
+  getAdmin()
   }, []);
+
+  const getAdmin=()=>{
+    axios
+    .get(`http://localhost:3000/auth/getAdminbyId/${params.id}`)
+    .then((result) => {
+      let val = result.data.Result.email
+      document.getElementById('inputEmail4').value = val
+    })
+    .catch((err) => console.log(err));
+  }
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,8 +50,9 @@ const AddAdmin = () => {
         password: password
     };
 
-    axios
-      .post("http://localhost:3000/auth/add_admin", payload)
+    if(params.id){
+      axios
+      .put(`http://localhost:3000/auth/edit_admin/${params.id}`, payload)
       .then((result) => {
         if (result.data.Status) {
           navigate("/dashboard");
@@ -42,6 +61,18 @@ const AddAdmin = () => {
         }
       })
       .catch((err) => console.log(err));
+    }else{
+      axios
+        .post("http://localhost:3000/auth/add_admin", payload)
+        .then((result) => {
+          if (result.data.Status) {
+            navigate("/dashboard");
+          } else {
+            alert(result.data.Error);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   return (
