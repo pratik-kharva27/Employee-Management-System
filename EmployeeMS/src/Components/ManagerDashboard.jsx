@@ -2,8 +2,18 @@ import React from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from "axios";
+import { useState, useEffect } from "react";
+
+
 
 const ManagerDashboard = () => {
+
+  const [email, setEmail] = useState([])
+  useEffect(() => {
+    setEmail(localStorage.getItem('email'))
+  }, []);
+
+
   const anvigate = useNavigate()
   axios.defaults.withCredentials = true
   const handleLogout = () => {
@@ -97,9 +107,18 @@ const ManagerDashboard = () => {
           </div>
         </div>
         <div className="col p-0 m-0">
-            <div className="p-2 d-flex justify-content-center shadow">
+            {/* <div className="p-2 d-flex justify-content-center shadow">
                 <h4>Emoployee Management System</h4>
-            </div>
+            </div> */}
+             <div className="p-2 shadow">
+        <div className="container-fluid">
+        <div className="row">
+          <div className="col"></div>
+          <div className="col text-center"><h4>Employee Management System </h4></div>
+          <div className="col text-end"><h4>{email}</h4></div>
+        </div>
+        </div>
+        </div>
             <Outlet />
         </div>
       </div>

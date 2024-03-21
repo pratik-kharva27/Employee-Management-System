@@ -17,6 +17,8 @@ const EmployeeLogin = () => {
         .then(result => {
             // console.log(result,"asd");
             if(result.data.loginStatus) {
+                let a = localStorage.setItem("email", values.email)
+                // console.log(local,"hello");
                 localStorage.setItem("valid", true)
                 navigate('/employee_detail/'+result.data.id)
             } else {

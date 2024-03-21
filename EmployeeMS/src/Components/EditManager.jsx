@@ -32,6 +32,7 @@ const EditManager = () => {
         axios.put('http://localhost:3000/auth/edit_manager/'+id, Manager)
         .then(result => {
             if(result.data.Status) {
+              alert("Edit manager data successfully ")
                 navigate('/dashboard/manager')
             } else {
                 alert(result.data.Error)

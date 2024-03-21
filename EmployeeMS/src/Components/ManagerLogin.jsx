@@ -17,6 +17,7 @@ const ManagerLogin = () => {
         .then(result => {
             // console.log(result,"asd");
             if(result.data.loginStatus) {
+                let a = localStorage.setItem("email", values.email)
                 localStorage.setItem("valid", true)
                 navigate('/manager-dashboard')
             } else {

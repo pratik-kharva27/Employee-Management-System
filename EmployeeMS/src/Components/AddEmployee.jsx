@@ -44,6 +44,7 @@ const AddEmployee = () => {
       .then((result) => {
         
         if (result.data.Status) {
+          alert("employee add successfully..")
           navigate("/dashboard/employee");
         } else {
           alert(result.data.Error);
@@ -147,7 +148,7 @@ const AddEmployee = () => {
           </div>
           <div className="col-12 mb-3">
             <label className="form-label" for="inputGroupFile01">
-              Select Image
+              Select Image 
             </label>
             <input
               type="file"

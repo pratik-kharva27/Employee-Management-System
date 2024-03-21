@@ -17,8 +17,9 @@ const Login = () => {
         event.preventDefault()
         axios.post('http://localhost:3000/auth/adminlogin', values)
         .then(result => {
-            console.log(result.values,"sparrow with ");
+            // console.log(result.values,"sparrow with ");
             if(result.data.loginStatus) {
+                let a = localStorage.setItem("email", values.email)
                 localStorage.setItem("valid", true)
                 navigate('/dashboard')
             } else {

@@ -31,6 +31,26 @@ const EmployeeManagerList = () => {
   useEffect(() => {
     getEmp()
   }, []);
+
+  const leave_status = (data,status) =>{
+    let payload = {
+      status : status,
+      email : data.email
+    }
+    // console.log(payload);
+    axios
+    .post("http://localhost:3000/auth/leave_Status", payload)
+    .then((result) => {
+      if (result.data.Status) {
+        // console.log(data,"Asdasd");
+      } else {
+        alert(result.data.Error);
+      }
+    })
+    .catch((err) => console.log(err));
+  }
+
+
  
   return (
     <div className="px-5 mt-3">
@@ -55,7 +75,7 @@ const EmployeeManagerList = () => {
           <tbody>
             {employee.map((e) => (
               <tr>
-                <td>{e.name}</td>
+                <td><a href="#link" className="text-dark link-underline-light">{e.name}</a></td>
                 <td>
                   <img
                     src={`http://localhost:3000/Images/` + e.image}
@@ -78,19 +98,23 @@ const EmployeeManagerList = () => {
                   >
                     Delete
                   </button>
-                  <button
+                  {e?.applied_leave? (
+                    <>
+                  <button 
                     className="btn btn-info btn-sm me-2" onClick={()=>{
-                      useNav(`/manager-dashboard/edit_manager_dashboard/${a.id}`)
+                      leave_status(e,'approve')
                     }}>
                     Approval Leave
                   </button>
                   <button
                   onClick={()=>{
-                    deleteAdmin(a)
+                    leave_status(e,'disapprove')
                   }}
                     className="btn btn-warning btn-sm" >
                     Decline Leave
                   </button>
+                    </>
+                 ):''}
                 </td>
               </tr>
             ))}

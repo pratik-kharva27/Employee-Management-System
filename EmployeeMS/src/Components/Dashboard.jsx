@@ -2,16 +2,24 @@ import React from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from "axios";
+import { useState, useEffect } from "react";  
+
 
 const Dashboard = () => {
-  const anvigate = useNavigate()
+  
+  const Navigate = useNavigate()
+  const [email, setEmail] = useState([])
+useEffect(() => {
+  setEmail(localStorage.getItem('email'))
+}, []);
+
   axios.defaults.withCredentials = true
   const handleLogout = () => {
     axios.get('http://localhost:3000/auth/logout')
     .then(result => {
       if(result.data.Status) { 
         localStorage.removeItem("valid")
-        anvigate('/')
+        Navigate('/')
       }
     })
   }
@@ -48,7 +56,7 @@ const Dashboard = () => {
                 >
                   <i className="fs-4 bi-people ms-2"></i>
                   <span className="ms-2 d-none d-sm-inline">
-                    Manage Employees
+                    Employees
                   </span>
                 </Link>
               </li>
@@ -73,7 +81,7 @@ const Dashboard = () => {
                   Category</span>
                 </Link>
               </li>
-              <li className="w-100">
+              {/* <li className="w-100">
                 <Link
                   to="/dashboard/profile"
                   className="nav-link px-0 align-middle text-white"
@@ -82,7 +90,7 @@ const Dashboard = () => {
                   <span className="ms-2 d-none d-sm-inline">
                   Profile</span>
                 </Link>
-              </li>
+              </li> */}
               <li className="w-100" onClick={handleLogout}>
               <Link
                   className="nav-link px-0 align-middle text-white"
@@ -96,9 +104,18 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="col p-0 m-0">
-            <div className="p-2 d-flex justify-content-center shadow">
+            {/* <div className="p-2 d-flex justify-content-center shadow">
                 <h4>Emoployee Management System</h4>
-            </div>
+            </div> */}
+              <div className="p-2 shadow">
+          <div className="container-fluid">
+          <div className="row">
+            <div className="col"></div>
+            <div className="col text-center"><h4>Employee Management System </h4></div>
+            <div className="col text-end"><h4>{email}</h4></div>
+          </div>
+          </div>
+          </div>
             <Outlet />
         </div>
       </div>

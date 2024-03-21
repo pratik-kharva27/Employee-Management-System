@@ -44,7 +44,8 @@ const AddEmployeeManager = () => {
       .then((result) => {
         
         if (result.data.Status) {
-          navigate("/dashboard/employee");
+          alert("Add Employee successfully ")
+          navigate("/manager-dashboard/list_employee_manager");
         } else {
           alert(result.data.Error);
         }

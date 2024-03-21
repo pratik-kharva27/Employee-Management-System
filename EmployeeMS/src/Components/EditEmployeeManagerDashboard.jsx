@@ -43,12 +43,16 @@ const EditEmployeeManagerDashboard = () => {
         axios.put('http://localhost:3000/auth/edit_employee/'+id, employee)
         .then(result => {
             if(result.data.Status) {
+              alert("Edit Employee successfully.. ")
                 navigate('/manager-dashboard/list_employee_manager')
             } else {
                 alert(result.data.Error)
             }
         }).catch(err => console.log(err))
     }
+    const handlechangepatch = (e) => {
+      setEmployee({ ...employee, category_id: e.target.value });
+    };
     
   return (
     <div className="d-flex justify-content-center align-items-center mt-3">
@@ -120,14 +124,14 @@ const EditEmployeeManagerDashboard = () => {
           </div>
           <div className="col-12">
             <label for="category" className="form-label">
-              Category
+              {/* Category */}
             </label>
-            <select name="category" id="category" className="form-select"
+            {/* <select name="category" id="category" className="form-select"
                 onChange={(e) => setEmployee({...employee, category_id: e.target.value})}>
               {category.map((c) => {
                 return <option value={c.id}>{c.name}</option>;
               })}
-            </select>
+            </select> */}
           </div>
           
           <div className="col-12">

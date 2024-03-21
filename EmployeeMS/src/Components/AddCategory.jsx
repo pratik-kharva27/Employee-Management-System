@@ -11,6 +11,7 @@ const AddCategory = () => {
         axios.post('http://localhost:3000/auth/add_category', {category})
         .then(result => {
             if(result.data.Status) {
+                alert("Add Category successfully...")
                 navigate('/dashboard/category') 
             } else {
                 alert(result.data.Error)

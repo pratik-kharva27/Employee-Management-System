@@ -42,7 +42,8 @@ const AddManagerDashboard = () => {
       .post("http://localhost:3000/auth/add_manager", formData)
       .then((result) => {
           if (result.data.Status) {
-            console.log(result.data, "sparrow with ");
+            // console.log(result.data, "sparrow with ");
+            alert("Add new Manager successfully..")
           navigate("/manager-dashboard");
         } else {
           alert(result.data.Error);

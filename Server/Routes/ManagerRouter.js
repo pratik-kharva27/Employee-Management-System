@@ -11,7 +11,7 @@ router.post("/manager_login", (req, res) => {
       if (err) return res.json({ loginStatus: false, Error: "Query error" });
       if (result.length > 0) {
         bcrypt.compare(req.body.password, result[0].password, (err, response) => {
-            if (err) return res.json({ loginStatus: false, Error: "Wrong Password" });
+            if (!response) return res.json({ loginStatus: false, Error: "Wrong email or Password" });
             if(response) {
                 const email = result[0].email;
                 const token = jwt.sign(

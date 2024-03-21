@@ -37,6 +37,7 @@ const AddAdmin = () => {
     .get(`http://localhost:3000/auth/getAdminbyId/${params.id}`)
     .then((result) => {
       let val = result.data.Result.email
+      setEmail(val)
       document.getElementById('inputEmail4').value = val
     })
     .catch((err) => console.log(err));
@@ -55,6 +56,7 @@ const AddAdmin = () => {
       .put(`http://localhost:3000/auth/edit_admin/${params.id}`, payload)
       .then((result) => {
         if (result.data.Status) {
+          alert("admin edit successfully ");
           navigate("/dashboard");
         } else {
           alert(result.data.Error);
@@ -66,6 +68,7 @@ const AddAdmin = () => {
         .post("http://localhost:3000/auth/add_admin", payload)
         .then((result) => {
           if (result.data.Status) {
+            alert("admin add successfully ");
             navigate("/dashboard");
           } else {
             alert(result.data.Error);
