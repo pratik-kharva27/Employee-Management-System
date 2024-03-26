@@ -105,7 +105,7 @@ const AddLeave = () => {
               className="form-control rounded-0"
               id="inputName"
               placeholder="Enter Name"
-              onChange={(e) => setLeave({ ...Leave, name: e.target.value })}
+              onChange={(e) => setLeave({ ...Leave, name: e.target.value })} required
             />
           </div>
           <div className="col-12">
@@ -118,7 +118,7 @@ const AddLeave = () => {
               id="inputEmail4"
               placeholder="Enter Email"
               autoComplete="off"
-              onChange={(e) => setLeave({ ...Leave, email: e.target.value })}
+              onChange={(e) => setLeave({ ...Leave, email: e.target.value })} required
             />
           </div>
 
@@ -143,7 +143,7 @@ const AddLeave = () => {
               className="form-control rounded-0"
               id="inputAddress"
               placeholder="Enter End date"
-              onChange={(e) => setLeave({ ...Leave, endDate: e.target.value })}
+              onChange={(e) => setLeave({ ...Leave, endDate: e.target.value })} 
             />
           </div>
           <div className="col-12">
@@ -155,7 +155,7 @@ const AddLeave = () => {
               className="form-control rounded-0"
               id="inputAddress"
               placeholder="Enter Reason...."
-              onChange={(e) => setLeave({ ...Leave, reason: e.target.value })}
+              onChange={(e) => setLeave({ ...Leave, reason: e.target.value })} required
             />
           </div>
 

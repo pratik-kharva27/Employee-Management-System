@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2024 at 01:33 PM
+-- Generation Time: Mar 26, 2024 at 01:13 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -80,19 +80,18 @@ CREATE TABLE `employee` (
   `image` varchar(60) NOT NULL,
   `category_id` int(11) NOT NULL,
   `applied_leave` int(11) DEFAULT NULL,
-  `leave_status` tinyint(1) DEFAULT NULL
+  `leave_status` tinyint(1) DEFAULT NULL,
+  `btnVisible` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`id`, `name`, `email`, `password`, `salary`, `address`, `image`, `category_id`, `applied_leave`, `leave_status`) VALUES
-(17, 'parvez', 'parvez@gmail.com', '$2b$10$G43R6a00cy7k1u4aXqDIEeNZCUI1MhPekDdwJnMoYcBtMACV/dl2u', 100000, 'vadodara', 'image_1710844804924.jpg', 4, 1, 1),
-(20, 'pratik kharva', 'pratik@gmail.com', '$2b$10$DOjLqGIVgk.CyCDhN1Is7OBX9k7zcLRlDDMtLGoThMWqeV2UWqHi2', 100000, 'vadodara', 'image_1710929845726.jpg', 4, 1, 1),
-(38, 'sparrow', 'sparrow@gmail.com', '$2b$10$4v5ZlwPe/JMoNfTUJAWDaekfRNUbAZheMFaNlKy08q70Idw5eT3T.', 100000, 'vadodara', 'image_1711023641855.jpg', 5, NULL, NULL),
-(39, 'rohan', 'rohan@gmail.com', '$2b$10$RjaK4sKmlu.eriSAffd6Fuf2r05D12JesVvt2QP.tmvycfYdkGpje', 15000, 'DDU', 'image_1711023723572.jpg', 5, NULL, NULL),
-(40, 'rahul', 'rahul@gmail.com', '$2b$10$jy1wzk/rZ5Obiyb2b1L/a.W7P0zLkVwg6RlxOkxKyvQC8dJavQ1DO', 150000, 'DDU', 'image_1711024117498.jpg', 5, NULL, NULL);
+INSERT INTO `employee` (`id`, `name`, `email`, `password`, `salary`, `address`, `image`, `category_id`, `applied_leave`, `leave_status`, `btnVisible`) VALUES
+(17, 'parvez', 'parvez@gmail.com', '$2b$10$G43R6a00cy7k1u4aXqDIEeNZCUI1MhPekDdwJnMoYcBtMACV/dl2u', 100000, 'vadodara', 'image_1710844804924.jpg', 4, 1, 2, 0),
+(20, 'pratik kharva', 'pratik@gmail.com', '$2b$10$DOjLqGIVgk.CyCDhN1Is7OBX9k7zcLRlDDMtLGoThMWqeV2UWqHi2', 100000, 'vadodara', 'image_1710929845726.jpg', 4, 1, 2, 0),
+(38, 'sparrow', 'sparrow@gmail.com', '$2b$10$4v5ZlwPe/JMoNfTUJAWDaekfRNUbAZheMFaNlKy08q70Idw5eT3T.', 100000, 'vadodara', 'image_1711023641855.jpg', 5, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -124,7 +123,21 @@ INSERT INTO `leave_request` (`id`, `name`, `email`, `startDate`, `endDate`, `rea
 (17, 'test', 'test@gmail.com', '2024-03-23', '2024-03-23', 'holi enjoyment '),
 (18, 'test', 'test@gmail.com', '2024-03-23', '2024-03-23', 'holi enjoyment '),
 (19, 'pratik kharva', 'pratik@gmail.com', '2024-03-22', '2024-03-22', 'holi enjoyment '),
-(20, 'pratik kharva', 'pratik@gmail.com', '2024-03-22', '2024-03-22', 'holi enjoyment ');
+(20, 'pratik kharva', 'pratik@gmail.com', '2024-03-22', '2024-03-22', 'holi enjoyment '),
+(21, 'pratik kharva', 'pratik@gmail.com', '2024-03-26', '2024-04-02', 'holi enjoyment '),
+(22, 'pratik kharva', 'pratik@gmail.com', '2024-03-26', '2024-03-30', 'holi enjoyment '),
+(23, 'pratik kharva', 'pratik@gmail.com', '2024-03-26', '2024-03-27', 'holi enjoyment '),
+(24, 'pratik kharva', 'pratik@gmail.com', '2024-03-27', '2024-03-27', 'holi enjoyment '),
+(25, 'pratik kharva', 'pratik@gmail.com', '2024-03-27', '2024-03-27', 'holi enjoyment '),
+(26, 'parvez', 'parvez@gmail.com', '2024-03-28', '2024-03-28', 'holi enjoyment '),
+(27, 'pratik', 'pratik@gmail.com', '2024-03-28', '2024-03-28', 'holi enjoyment '),
+(28, 'parvez', 'parvez@gmail.com', '2024-03-27', '2024-03-27', 'holi enjoyment '),
+(29, 'pratik kharva', 'pratik@gmail.com', '2024-03-27', '2024-03-27', 'holi enjoyment '),
+(30, 'pratik kharva', 'pratik@gmail.com', '2024-03-30', '2024-03-31', 'holi enjoyment '),
+(31, 'pratik kharva', 'pratik@gmail.com', '2024-03-30', '2024-03-30', 'holi enjoyment '),
+(32, 'pratik kharva', 'pratik@gmail.com', '2024-03-29', '2024-03-30', 'holi enjoyment '),
+(33, 'pratik kharva', 'pratik@gmail.com', '2024-03-28', '2024-03-28', 'holi enjoyment '),
+(34, 'pratik kharva', 'pratik@gmail.com', '2024-03-29', '2024-03-29', 'holi enjoyment ');
 
 -- --------------------------------------------------------
 
@@ -206,13 +219,13 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `leave_request`
 --
 ALTER TABLE `leave_request`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `manager`

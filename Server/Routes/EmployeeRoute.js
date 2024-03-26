@@ -50,9 +50,34 @@ router.post("/employee_login", (req, res) => {
     })
   })
 
-  router.get('/logout', (req, res) => {
-    res.clearCookie('token')
-    return res.json({Status: true})
-  })
+  router.get("/logout", (req, res) => {
+    res.clearCookie("token");
+    return res.json({ Status: true });
+  });
+
+  router.post("/doneBtn", (req, res) => {
+    let id
+    console.log(req.body,"Asdasd");
+    const getEmp = "SELECT * from employee Where email = ?";
+    con.query(getEmp, [req.body.email], (err, result) => {
+      if (result.length < 1) {
+        return res.json({ Error: "No Employee Found" });
+      }
+      if (result.length > 0) {
+        console.log(result,"Asdasd");
+        id = result[0].id;
+        // console.log(id, "hgs");
+        const update = `UPDATE employee
+              SET leave_status = 2
+              WHERE id = ?`;
+  
+        con.query(update, id, (err, result) => {
+          // console.log(result, "jhgjhg");
+          if (err) return res.json({ Status: false, Error: "Query Error" + err });
+        });
+  
+      }
+    });
+  });
 
   export {router as EmployeeRouter}

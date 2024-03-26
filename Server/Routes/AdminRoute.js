@@ -311,7 +311,7 @@ router.post("/add_Leave", (req, res) => {
       id = result[0].id;
       // console.log(id, "hgs");
       const update = `UPDATE employee
-            SET applied_leave = 1
+            SET applied_leave = 1 , btnVisible = 1
             WHERE id = ?`;
 
       con.query(update, id, (err, result) => {
@@ -343,15 +343,15 @@ router.post("/leave_Status", (req, res) => {
   let update;
   if (req.body.status == "approve") {
     update = `UPDATE employee
-        SET leave_status = 1
+        SET leave_status = 1, btnVisible = 0
         WHERE id = ?`;
   } else if (req.body.status == "disapprove") {
     update = `UPDATE employee
-        SET leave_status = 0
+        SET leave_status = 0 , btnVisible = 0
         WHERE id = ?`;
   }
   let id;
-  const getEmp = "SELECT * from employee Where email = ?";
+  const getEmp = "SELECT * from employee WHERE email = ?";
   con.query(getEmp, [req.body.email], (err, result) => {
     if (result.length < 1) {
       return res.json({ Error: "No Employee Found" });
@@ -359,25 +359,15 @@ router.post("/leave_Status", (req, res) => {
     if (result.length > 0) {
       id = result[0].id;
       con.query(update, id, (err, result) => {
+        if(result){
+          
+          res.json({ Status: true, msg: "Status Updated" });
+        }
         if (err) return res.json({ Status: false, Error: "Query Error" + err });
       });
-
-      const sql = `INSERT INTO leave_request 
-            (name,email,startDate,endDate,reason) 
-            VALUES (?)`;
-
-      if (err) return res.json({ Status: false, Error: "Query Error" });
-      const values = [
-        req.body.name,
-        req.body.email,
-        req.body.startDate,
-        req.body.endDate,
-        req.body.reason,
-      ];
-      con.query(sql, [values], (err, rest) => {
-        if (err) return res.json({ Status: false, Error: err });
-        return res.json({ Status: true, id: id });
-      });
+    }
+    else{
+      return err
     }
   });
 });
@@ -385,7 +375,7 @@ router.post("/leave_Status", (req, res) => {
 
 router.delete("/delete_category/:id", (req, res) => {
   const id = req.params.id;
-  // console.log(id,"sparrow");
+  
   const sql = "delete from category where id = ?";
   con.query(sql, [id], (err, result) => {
     if (err) return res.json({ Status: false, Error: "Query Error" + err });

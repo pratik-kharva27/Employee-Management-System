@@ -11,7 +11,10 @@ const EmployeeManagerList = () => {
     axios
     .delete(`http://localhost:3000/auth/delete_employee/${e.id}`)
     .then((result) => {
-      getEmp()
+      if (result.data.Status) {
+        getEmp()
+        alert("Employee Delete Successfully.....")
+      }
     })
     .catch((err) => console.log(err));
   }
@@ -37,15 +40,11 @@ const EmployeeManagerList = () => {
       status : status,
       email : data.email
     }
-    // console.log(payload);
     axios
     .post("http://localhost:3000/auth/leave_Status", payload)
     .then((result) => {
-      if (result.data.Status) {
-        // console.log(data,"Asdasd");
-      } else {
-        alert(result.data.Error);
-      }
+      alert(result.data.msg)
+      getEmp()
     })
     .catch((err) => console.log(err));
   }
@@ -98,7 +97,7 @@ const EmployeeManagerList = () => {
                   >
                     Delete
                   </button>
-                  {e?.applied_leave? (
+                  {e?.applied_leave && e.btnVisible? (
                     <>
                   <button 
                     className="btn btn-info btn-sm me-2" onClick={()=>{

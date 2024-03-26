@@ -10,25 +10,39 @@ const EmployeeDetail = () => {
     
     const [email, setEmail] = useState([])
     
-
-    useEffect(() => {
-        axios.get('http://localhost:3000/employee/detail/'+id)
+    const doneBtn = (data) =>{
+      axios.post('http://localhost:3000/employee/doneBtn',{email:data})
         .then(result => {
-            setEmployee(result.data[0])
+         
         })
         .catch(err => console.log(err))
+
+        window.location.reload()
+    }
+
+    const getEmpbyId = () => {
+      axios.get('http://localhost:3000/employee/detail/'+id)
+      .then(result => {
+          setEmployee(result.data[0])
+      })
+      .catch(err => console.log(err))
+    }
+    useEffect(() => {
+      getEmpbyId()
         setEmail(localStorage.getItem('email'))
         
     }, [])
     const handleLogout = () => {
         axios.get('http://localhost:3000/employee/logout')
         .then(result => {
+
           localStorage.removeItem("valid")
-            navigate('/')
+          navigate('/')
+          
         }).catch(err => console.log(err))
       }
   return (
-    <div>
+    <div >
         <div className="p-2 shadow">
         <div className="container-fluid">
         <div className="row">
@@ -45,10 +59,17 @@ const EmployeeDetail = () => {
             <div className='col text-center'>
             <img src={`http://localhost:3000/Images/`+employee?.image} className='emp_det_image mx-auto'/>
             </div>
-            <div className='col text-left'>
-              <h2>Leave Status</h2>
+            <div className='col text-left '>
+              <h2>Leave Status 
+                {employee?.leave_status !== 2 ? 
+                <button className='btn btn-primary' style={{marginLeft: '10px'}} onClick={()=>{
+                        doneBtn(employee?.email)
+                      }}> Done </button>
+                      : ''}
+              </h2>
                 <h4>{employee?.leave_status == 1 ? " your Leave Approve" : null}</h4>
                 <h4>{employee?.leave_status == 0 ?  " your Leave Dis-Approved" : null}</h4>
+                <h4>{employee?.leave_status == 2 ?  "" : null}</h4>
             </div>
           </div>
             <div className='d-flex align-items-center flex-column mt-3'>
