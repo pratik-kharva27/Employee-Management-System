@@ -1,0 +1,11 @@
+Admin
+user :- admin@gmail.com
+pass :- 12345
+
+Manager
+user :- manager@gmail.com
+pass :- 12345
+
+employee
+user :- sparrow@gmail.com
+pass :- 12345
